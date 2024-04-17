@@ -11,6 +11,17 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.post('/', async (req, res) => {
+  try {
+    const newResource = await Resources.addResource(req.body)
+    res.status(201).json(newResource)
+  } catch(err) {
+    res.status(500).json({
+      message: err
+    })
+  }
+})
+
 
 router.use((err, req, res, next) => { 
   res.status(500).json({
